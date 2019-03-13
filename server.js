@@ -16,6 +16,9 @@ app.get('/', function(req, res) {
 
 app.get('/api/user', (req, res) => {
   let ipaddress = req.ip;
+  if (/^\:/.test(ipaddress)) {
+    ipaddress = ipaddress.split(':')[3];
+  }
   let language = req.headers['accept-language'].split(',')[0];
   let software = req.headers['user-agent'].match(/\((.+?)\)/)[1];
   console.log(ipaddress, software);
